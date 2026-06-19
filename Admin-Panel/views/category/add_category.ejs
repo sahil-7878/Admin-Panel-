@@ -1,0 +1,69 @@
+<%- include('../layouts/header') %>
+
+<div class="flex-1 flex flex-col h-screen md:ml-64 main-content transition-all duration-300">
+
+    <div class="bg-white h-16 border-b border-slate-200 flex items-center justify-between px-6 sticky top-0 z-10">
+        <div class="flex items-center text-slate-500 text-sm breadcrumbs">
+            <a href="/dashboard" class="hover:text-indigo-600 cursor-pointer transition">Dashboard</a>
+            <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
+            <a href="/category/viewCategory" class="hover:text-indigo-600 cursor-pointer transition">Categories</a>
+            <i data-lucide="chevron-right" class="w-4 h-4 mx-2"></i>
+            <span class="text-slate-800 font-medium">Add Category</span>
+        </div>
+    </div>
+
+    <main class="flex-1 overflow-y-auto p-8 bg-slate-50">
+        <div class="max-w-2xl mx-auto">
+            
+            <div class="mb-6">
+                <h1 class="text-2xl font-bold text-slate-800">Add New Category</h1>
+                <p class="text-slate-500 text-sm mt-1">Create a category to organize your products.</p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                <form action="/category/addCategory" method="POST" class="p-8 space-y-6">
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Category Name</label>
+                        <input type="text" name="cat_name" placeholder="e.g. Electronics, Fashion" required
+                            class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition shadow-sm placeholder-slate-400 text-slate-700">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-3">Status</label>
+                        <div class="flex items-center space-x-6">
+                            <label class="flex items-center cursor-pointer group">
+                                <div class="relative flex items-center">
+                                    <input type="radio" name="status" value="1" checked class="peer sr-only">
+                                    <div class="w-5 h-5 border-2 border-slate-300 rounded-full peer-checked:border-indigo-600 peer-checked:bg-indigo-600 transition"></div>
+                                    <div class="absolute w-2 h-2 bg-white rounded-full left-1.5 top-1.5 opacity-0 peer-checked:opacity-100 transition"></div>
+                                </div>
+                                <span class="ml-3 text-sm font-medium text-slate-700 group-hover:text-indigo-600 transition">Active</span>
+                            </label>
+
+                            <label class="flex items-center cursor-pointer group">
+                                <div class="relative flex items-center">
+                                    <input type="radio" name="status" value="0" class="peer sr-only">
+                                    <div class="w-5 h-5 border-2 border-slate-300 rounded-full peer-checked:border-red-500 peer-checked:bg-red-500 transition"></div>
+                                    <div class="absolute w-2 h-2 bg-white rounded-full left-1.5 top-1.5 opacity-0 peer-checked:opacity-100 transition"></div>
+                                </div>
+                                <span class="ml-3 text-sm font-medium text-slate-700 group-hover:text-red-500 transition">Deactive</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-slate-100 flex items-center justify-end space-x-3">
+                        <a href="/category/viewCategory" class="px-5 py-2.5 rounded-lg border border-slate-300 text-slate-600 text-sm font-medium hover:bg-slate-50 transition">Cancel</a>
+                        <button type="submit" class="px-6 py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 shadow-md shadow-indigo-200 transition flex items-center">
+                            <i data-lucide="plus-circle" class="w-4 h-4 mr-2"></i> Save Category
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<%- include('../layouts/footer') %>

@@ -1,0 +1,80 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<style>
+    .toastify {
+        background: white !important;
+        color: #334155 !important;
+        position: fixed !important;
+        z-index: 99999 !important;
+    }
+
+    .toastify .toast-close {
+        color: #334155 !important;
+        opacity: 1 !important;
+        margin-left: 10px;
+    }
+
+    .toastify::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        width: 100%;
+        animation: toast-progress 3s linear forwards;
+    }
+
+    .ts::after {
+        background: #10b981;
+    }
+
+    .te::after {
+        background: #ef4444;
+    }
+
+    @keyframes toast-progress {
+        0% {
+            width: 100%;
+        }
+
+        100% {
+            width: 0%;
+        }
+    }
+</style>
+
+<script>
+
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+    
+    <% if (locals.flash && locals.flash.success && locals.flash.success.length > 0) { %>
+        Toastify({
+            text: "<%= locals.flash.success %>",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            className: "ts",
+        }).showToast();
+    <% } %>
+
+    <% if (locals.flash && locals.flash.error && locals.flash.error.length > 0) { %>
+        Toastify({
+            text: "<%= locals.flash.error %>",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            className: "te",
+        }).showToast();
+    <% } %>
+</script>
+
+<script src="/js/main.js"></script>
+</body>
+
+</html>

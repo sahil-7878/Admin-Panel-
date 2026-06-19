@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP | Nexus Admin</title>
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
+    <script src="/js/tailwind.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 flex items-center justify-center h-screen px-4">
+
+    <div class="w-full max-w-md bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+        <div class="text-center mb-8">
+            <div
+                class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 mb-4">
+                <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <h1 class="text-2xl font-bold text-slate-800">Enter Verification Code</h1>
+            <p class="text-slate-500 text-sm mt-2">We sent a code to your email.</p>
+        </div>
+
+        <form action="/forgetPassword/verify-otp" method="POST" class="space-y-5">
+            <div>
+                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">One-Time Password</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="key" class="h-4 w-4 text-slate-400"></i>
+                    </div>
+                    <input type="text" name="otp" placeholder="123456" required maxlength="6"
+                        class="pl-10 block w-full rounded-lg border-slate-300 border bg-white px-3 py-2.5 text-sm text-slate-600 shadow-sm placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition duration-200 tracking-widest font-mono text-center text-lg">
+                </div>
+            </div>
+
+            <button type="submit"
+                class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                Verify Code
+            </button>
+        </form>
+
+        <div class="mt-6 text-center border-t border-slate-100 pt-6">
+            <a href="/forgetPassword/check-email"
+                class="text-sm font-semibold text-indigo-600 hover:text-indigo-500">Resend Code</a>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <style>
+    .toastify {
+        background: white !important;
+        color: #334155 !important;
+        position: fixed !important;
+        z-index: 99999 !important;
+        padding: 15px;
+    }
+
+    .toastify .toast-close {
+        color: #334155 !important;
+        opacity: 1 !important;
+        margin-left: 10px;
+    }
+
+    .toastify::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        width: 100%;
+        animation: toast-progress 3.6s linear forwards;
+    }
+
+        .toast-success::after {
+            background-color: #10b981;
+        }
+
+        .toast-error::after {
+            background-color: #ef4444;
+        }
+
+        @keyframes toast-progress {
+            0% {
+                width: 100%;
+            }
+
+            100% {
+                width: 0%;
+            }
+        }
+    </style>
+
+    <script>
+        lucide.createIcons();
+        
+        <% if (locals.flash && locals.flash.success && locals.flash.success.length > 0) { %>
+            Toastify({
+                text: "<%= locals.flash.success %>",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                className: "toast-success"
+            }).showToast();
+        <% } %>
+        <% if (locals.flash && locals.flash.error && locals.flash.error.length > 0) { %>
+            Toastify({
+                text: "<%= locals.flash.error %>",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                className: "toast-error"
+            }).showToast();
+        <% } %>
+    </script>
+</body>
+
+</html>

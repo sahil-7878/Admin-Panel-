@@ -1,0 +1,102 @@
+<%- include('../layouts/header') %>
+
+    <div class="flex-1 flex flex-col h-screen md:ml-64 main-content transition-all duration-300">
+        <div class="bg-white h-16 border-b border-slate-200 flex items-center justify-between px-6 sticky top-0 z-10">
+            <h2 class="text-lg font-bold text-slate-800">Add New Product</h2>
+            <a href="/product/viewProduct" class="text-indigo-600 hover:text-indigo-700 text-sm font-medium">View
+                All</a>
+        </div>
+
+        <main class="flex-1 overflow-y-auto p-8 bg-slate-50">
+            <div class="max-w-3xl mx-auto bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+
+                <form action="/product/insertProduct" method="POST" enctype="multipart/form-data" class="space-y-6">
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Product Name</label>
+                            <input type="text" name="product_name" placeholder="e.g. Nike Air Max" required
+                                class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Price ($)</label>
+                            <input type="number" name="price" placeholder="99.00" required
+                                class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Sub Category</label>
+                            <div class="relative">
+                                <select name="subcategoryID" required
+                                    class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none appearance-none bg-white">
+                                    <option value="" disabled selected>-- Select Sub Category --</option>
+                                    <% subCategories.map((subCat)=> { %>
+                                        <option value="<%= subCat._id %>">
+                                            <%= subCat.sname %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                                <i data-lucide="chevron-down"
+                                    class="absolute right-3 top-3.5 w-4 h-4 text-slate-400 pointer-events-none"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Product Image</label>
+                            <input type="file" name="product_image" required
+                                class="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Description</label>
+                        <textarea name="desc" rows="3" placeholder="Enter product details..." required
+                            class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-3">Status</label>
+                        <div class="flex items-center space-x-6">
+                            <label class="flex items-center cursor-pointer group">
+                                <div class="relative flex items-center">
+                                    <input type="radio" name="status" value="1" checked class="peer sr-only">
+                                    <div
+                                        class="w-5 h-5 border-2 border-slate-300 rounded-full peer-checked:border-indigo-600 peer-checked:bg-indigo-600 transition">
+                                    </div>
+                                    <div
+                                        class="absolute w-2 h-2 bg-white rounded-full left-1.5 top-1.5 opacity-0 peer-checked:opacity-100 transition">
+                                    </div>
+                                </div>
+                                <span
+                                    class="ml-3 text-sm font-medium text-slate-700 group-hover:text-indigo-600 transition">Active</span>
+                            </label>
+
+                            <label class="flex items-center cursor-pointer group">
+                                <div class="relative flex items-center">
+                                    <input type="radio" name="status" value="0" class="peer sr-only">
+                                    <div
+                                        class="w-5 h-5 border-2 border-slate-300 rounded-full peer-checked:border-red-500 peer-checked:bg-red-500 transition">
+                                    </div>
+                                    <div
+                                        class="absolute w-2 h-2 bg-white rounded-full left-1.5 top-1.5 opacity-0 peer-checked:opacity-100 transition">
+                                    </div>
+                                </div>
+                                <span
+                                    class="ml-3 text-sm font-medium text-slate-700 group-hover:text-red-500 transition">Deactive</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 flex justify-end">
+                        <button type="submit"
+                            class="px-6 py-2.5 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition shadow-lg shadow-indigo-200 cursor-pointer">
+                            Save Product
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <%- include('../layouts/footer') %>
